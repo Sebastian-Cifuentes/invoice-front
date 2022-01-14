@@ -1,0 +1,42 @@
+<app-sidebar></app-sidebar>
+
+<div class="px-5 w-80 float-right">
+    <h4 class="text-light mt-3">Facturas</h4>
+    <div class="d-flex justify-content-end" (click)="openModal(content)">
+        <button class="btn btn-primary mb-3">Crear factura</button>
+    </div>
+    <kendo-grid [data]="invoices" [pageSize]="state.take!" [skip]="state.skip!" [sort]="state.sort!" [filter]="state.filter!" [sortable]="true" [pageable]="true" [filterable]="true" (dataStateChange)="dataStateChange($event)">
+        <kendo-grid-column field="invoiceId" title="Id de factura" [width]=100 [filterable]="false">
+        </kendo-grid-column>
+        <kendo-grid-column field="totalValue" title="Valor total">
+        </kendo-grid-column>
+        <kendo-grid-column field="totalVat" title="Iva total">
+        </kendo-grid-column>
+        <kendo-grid-column field="items.length" title="Total de items">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <p>{{ dataItem.items.length }}</p>
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="paid" title="Pagada">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <p>{{ dataItem.paid | uppercase }}</p>
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column title="Acciones">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <button class="btn btn-primary" (click)="openModal(content, dataItem._id)">
+                    <img src="assets/logos/edit.png" width="15" alt="">
+                </button>
+                <button class="btn btn-danger mx-2" (click)="remove(dataItem._id)">
+                    <img src="assets/logos/trash.png" width="15" alt="">
+                </button>
+            </ng-template>
+        </kendo-grid-column>
+    </kendo-grid>
+</div>
+
+<ng-template #content>
+
+    <app-create-update-invoice (onadditem)="getAll()" [id]="invoiceIdSelect"></app-create-update-invoice>
+
+</ng-template>

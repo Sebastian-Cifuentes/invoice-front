@@ -1,0 +1,39 @@
+<table *ngIf="items.length !== 0" class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Iva</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items">
+            <td>{{ item.name }}</td>
+            <td>{{ item.value }}</td>
+            <td>{{ item.vat }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<form *ngIf="showForm" [formGroup]="form">
+    <div class="row">
+        <div class="col">
+            <input formControlName="name" type="text" class="form-control" placeholder="Nombre del item">
+        </div>
+        <div class="col">
+            <input formControlName="value" type="number" class="form-control" placeholder="Valor">
+        </div>
+        <div class="col">
+            <input formControlName="vat" type="number" class="form-control" placeholder="Iva">
+        </div>
+        <div class="col">
+            <button class="btn btn-primary" (click)="save()">
+                <img src="assets/logos/plus.png" width="20" alt="">
+            </button>
+        </div>
+    </div>
+</form>
+
+<button class="btn btn-primary my-3" (click)="showForm = !showForm">
+    {{ showForm ? 'Desactivar formulario' : 'Añadir item' }}
+</button>

@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h4 class="modal-title">
+        {{ invoice?._id ? 'Actualizar' : 'Crear' }} factura
+    </h4>
+</div>
+<div class="modal-body">
+
+    <form [formGroup]="form">
+        <div class="mt-3 mb-3">
+            <label for="invoiceid" class="form-label">Identificación de la factura</label>
+            <input formControlName="invoiceId" type="text" class="form-control" id="invoiceid" placeholder="0" [readonly]="invoice?._id ? true : false">
+        </div>
+        <div class="mb-3">
+            <label for="totalValue" class="form-label">Valor total</label>
+            <input formControlName="totalValue" type="number" class="form-control" id="totalValue" placeholder="0">
+        </div>
+        <div class="mb-3">
+            <label for="totalVat" class="form-label">Iva total</label>
+            <input formControlName="totalVat" type="number" class="form-control" id="totalVat" placeholder="0">
+        </div>
+
+        <app-add-item (onadditem)="addItem($event)" [items]="invoice?.items ? invoice?.items! : []"></app-add-item>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="paid">Pagada</label>
+            </div>
+            <select formControlName="paid" style="width:89%" class="custom-select" id="paid">
+              <option selected>Seleccionar</option>
+              <option value="si">Si</option>
+              <option value="no">No</option>
+            </select>
+        </div>
+
+        <div class="text-center">
+            <button class="btn btn-primary mx-2" (click)="modalService.dismissAll()">Cancelar</button>
+            <button class="btn btn-primary" (click)="create()">{{ invoice?._id ? 'Actualizar' : 'Crear' }} factura</button>
+        </div>
+
+    </form>
+
+</div>

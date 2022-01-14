@@ -1,0 +1,14 @@
+<div class="bg-light w-20 h-100vh text-center pt-3 float-left">
+
+    <div class="d-flex justify-content-center align-items-center flex-column mb-3">
+        <img src="assets/logos/profile.png" width="50" height="50" alt="">
+        <b class="mt-1">{{ user?.name }}</b>
+        <small>{{ user?.email }}</small>
+        <small>{{ user?.phone }}</small>
+    </div>
+
+    <ul class="list-group">
+        <li class="list-group-item pointer">Facturas</li>
+        <li class="list-group-item pointer" (click)="logout()">Cerrar sesión</li>
+    </ul>
+</div>
